@@ -5,6 +5,7 @@
  */
 package Model;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -259,10 +260,6 @@ public class ClienteTableModel extends AbstractTableModel {
         Cliente cliente = linhas.get(rowIndex);
 
         switch (columnIndex) {
-            case NOME:
-                return cliente.getNome();
-            case ENDERECO:
-                return cliente.getEndereco();
             case CODCADASTRCLIENTES:
                 return cliente.getCodcadastroclientes();
             case NOME:
@@ -401,6 +398,220 @@ public class ClienteTableModel extends AbstractTableModel {
                 // Não deve ocorrer, pois só existem 2 colunas
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
+    }
+
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        // Pega o sócio referente a linha especificada.
+        Cliente cliente = linhas.get(rowIndex);
+
+        switch (columnIndex) {
+            case CODCADASTRCLIENTES:
+                cliente.setCodcadastroclientes((int) aValue);
+                break;
+            case NOME:
+                cliente.setNome((String) aValue);
+                break;
+            case NASCIMENTO:
+                cliente.setNascimento((Date) aValue);
+                break;
+            case ATIVO:
+                cliente.setAtivo((boolean) aValue);
+                break;
+            case ENDERECO:
+                cliente.setEndereco((String) aValue);
+                break;
+            case NUMERO:
+                cliente.setNumero((int) aValue);
+                break;
+            case BAIRRO:
+                cliente.setBairro((String) aValue);
+                break;
+            case CIDADE:
+                cliente.setCidade((String) aValue);
+                break;
+            case ESTADO:
+                cliente.setEstado((String) aValue);
+                break;
+            case COMPLEMENTO:
+                cliente.setComplemento((String) aValue);
+                break;
+            case CEP:
+                cliente.setCep((String) aValue);
+                break;
+            case EMAIL:
+                cliente.setEmail((String) aValue);
+                break;
+            case SITE:
+                cliente.setSite((String) aValue);
+                break;
+            case PONTOREFERENCIA:
+                cliente.setPontoreferencia((String) aValue);
+                break;
+            case ATIVACONVENIADO:
+                cliente.setAtivaconveniado((boolean) aValue);
+                break;
+            case TELEFONE:
+                cliente.setTelefone((String) aValue);
+                break;
+            case CELULAR:
+                cliente.setCelular((String) aValue);
+                break;
+            case FAX:
+                cliente.setFax((String) aValue);
+                break;
+            case FISICA:
+                cliente.setFisica((boolean) aValue);
+                break;
+            case JURIDICA:
+                cliente.setJuridica((boolean) aValue);
+                break;
+            case CPF:
+                cliente.setCpf((String) aValue);
+                break;
+            case RG:
+                cliente.setRg((String) aValue);
+                break;
+            case CNPJ:
+                cliente.setCnpj((String) aValue);
+                break;
+            case INCRICAOESTADUAL:
+                cliente.setIncricaoestadual((String) aValue);
+                break;
+            case OBSERVACOES:
+                cliente.setObservacoes((String) aValue);
+                break;
+            case DATACADASTRO:
+                cliente.setDatacadastro((Date) aValue);
+                break;
+            case LIMITECREDITO:
+                cliente.setLimitecredito((float) aValue);
+                break;
+            case TOTALFATURAS:
+                cliente.setTotalfaturas((float) aValue);
+                break;
+            case JUROS:
+                cliente.setJuros((float) aValue);
+                break;
+            case MULTA:
+                cliente.setMulta((float) aValue);
+                break;
+            case DIABOMPAGAMENTO:
+                cliente.setDiabompagamento((Date) aValue);
+                break;
+            case ENDERECOENTREGA:
+                cliente.setEnderecoentrega((String) aValue);
+                break;
+            case NUMEROENTREGA:
+                cliente.setNumeroentrega((int)aValue);
+                 break;
+            case BAIRROENTREGA:
+                cliente.setBairroentrega((String)aValue);
+                 break;
+            case CIDADEENTREGA:
+                cliente.setCidadeentrega((String)aValue);
+                 break;
+            case ESTADOENTREGA:
+                cliente.setEstadoentrega((String)aValue);
+                 break;
+            case COMPLEMENTOENTREGA:
+                cliente.setComplementoentrega((String)aValue);
+                 break;
+            case CEPENTREGA:
+                cliente.setCepentrega((String)aValue);
+                 break;
+            case PONTOREFERENCIAENTREGA:
+                cliente.setPontoreferenciaentrega((String)aValue);
+                 break;
+            case USAENTREGA:
+                cliente.setUsaentrega((boolean)aValue);
+                 break;
+            case CHEQUEBLOQUEADO:
+                cliente.setChequebloqueado((boolean)aValue);
+                 break;
+            case LIMITECHEQUE:
+                cliente.setLimitecheque((float)aValue);
+                 break;
+            case INCLUIIPINABC:
+                cliente.setIncluiipinabc((boolean)aValue);
+                 break;
+            case CONVENIOPORMES:
+                cliente.setConveniopormes((boolean)aValue);
+                 break;
+            case NOMEFANTASIA:
+                cliente.setNomefantasia((String)aValue);
+                 break;
+            case PERMITECONVENIOVINCULADO:
+                cliente.setPermiteconveniovinculado((boolean)aValue);
+                 break;
+            case PLACA:
+                cliente.setPlaca((String)aValue);
+                 break;
+            case MODELO:
+                cliente.setModelo((String)aValue);
+                 break;
+            case MARCA:
+                cliente.setMarca((String)aValue);
+                 break;
+            case ANO:
+                cliente.setAno((String)aValue);
+                 break;
+            case COR:
+                cliente.setCor((String)aValue);
+                 break;
+            case PAIS:
+                cliente.setPais((String)aValue);
+                 break;
+            case DOCESTRANGEIRO:
+                cliente.setDocestrangeiro((String)aValue);
+                 break;
+            case ESTRANGEIRO:
+                cliente.setEstrangeiro((boolean)aValue);
+                 break;
+            case CREDITOCONVENIO:
+                cliente.setCreditoconvenio((float)aValue);
+                 break;
+            case CONVENIOPORMESCR:
+                cliente.setConveniopormescr((boolean)aValue);
+                 break;
+            case JUROSCR:
+                cliente.setJuroscr((float)aValue);
+                 break;
+            case MULTACR:
+                cliente.setMultacr((float)aValue);
+                 break;
+            case DIABOMPAGAMENTOCR:
+                cliente.setDiabompagamentocr((String)aValue);
+                 break;
+            case LIMITECREDITOCR:
+                cliente.setLimitecreditocr((float)aValue);
+                 break;
+            case LIMITECONTASRECEBER:
+                cliente.setLimitecontasreceber((float)aValue);
+                 break;
+            case LIMITEUTILIZADOCONTASRECEBER:
+                cliente.setLimiteutilizadocontasreceber((float)aValue);
+                 break;
+            case FUNCIONARIO:
+                cliente.setFuncionario((boolean)aValue);
+                 break;
+            case PISPASEP:
+                cliente.setPispasep((String)aValue);
+                 break;
+            case NUMEROCARTEIRA:
+                cliente.setNumerocarteira((String)aValue);
+                 break;
+            case SERIECARTEIRA:
+                cliente.setSeriecarteira((String)aValue);
+                 break;
+            case UFCARTEIRA:
+               cliente.setUfcarteira((String)aValue);
+                 break;
+            default:
+                // Não deve ocorrer, pois só existem 2 colunas
+                throw new IndexOutOfBoundsException("columnIndex out of bounds");
+        }
+        fireTableCellUpdated(rowIndex, columnIndex);
     }
 
 }
