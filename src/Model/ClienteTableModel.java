@@ -245,7 +245,7 @@ public class ClienteTableModel extends AbstractTableModel {
                 return String.class;
             default:
                 // 
-                throw new IndexOutOfBoundsException("columnIndex out of bounds");
+                throw new IndexOutOfBoundsException("Indeice de coluna fora da faixa existente");
         }
     }
 
@@ -396,7 +396,7 @@ public class ClienteTableModel extends AbstractTableModel {
                 return cliente.getUfcarteira();
             default:
                 // Não deve ocorrer, pois só existem 2 colunas
-                throw new IndexOutOfBoundsException("columnIndex out of bounds");
+                throw new IndexOutOfBoundsException("Indice de colunda fora da faixa existente");
         }
     }
 
