@@ -609,7 +609,7 @@ public class ClienteTableModel extends AbstractTableModel {
                  break;
             default:
                 // Não deve ocorrer, pois só existem 2 colunas
-                throw new IndexOutOfBoundsException("columnIndex out of bounds");
+                throw new IndexOutOfBoundsException("Indice de coluna fora da faixa existente");
         }
         fireTableCellUpdated(rowIndex, columnIndex);
     }
