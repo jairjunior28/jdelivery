@@ -15,10 +15,8 @@ import java.sql.DriverManager;
  */
 public class DAOLancador {
 
-    public static void listar() {
-        Conexao con=new Conexao();
-        
-    }
+    
+
     
     
     
