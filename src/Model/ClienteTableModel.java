@@ -5,9 +5,15 @@
  */
 package Model;
 
+import Persistencia.Conexao;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -18,19 +24,20 @@ public class ClienteTableModel extends AbstractTableModel {
 // Lista de Sócios a serem exibidos na tabela
 
     private List<Cliente> linhas;
-    private String[] colunas = new String[]{"codcadastroclientes", "nome", "nascimento", "ativo", "endereco", "numero", "bairro", "cidade",
+    private String[] colunas = new String[]{"nome","endereco","telefone","celular"};
+            /*{"codcadastroclientes", "nome", "nascimento", "ativo", "endereco", "numero", "bairro", "cidade",
         "estado", "complemento", "cep", "email", "site", "pontoreferencia", "ativaconveniado", "telefone", "celular", "fax", "fisica", "juridica",
         "cpf", "rg", "cnpj", "inscricaoestadual", "observacoes", "datacadastro", "limitecredito", "totalfaturas", "juros", "multa", "diabompagamento",
         "enderecoentrega", "numeroentrega", "bairroentrega", "cidadeentrega", "estadoentrega", "complementoentrega", "cepentrega", "pontoreferenciaentrega",
         "usaentrega", "chequebloqueado", "limitecheque", "incluiipinabc", "conveniopormes", "nomefantasia", "permiteconveniovinculado", "placa", "modelo",
         "marca", "ano", "cor", "pais", "docestrangeiro", "estrangeiro", "creditoconvenio", "conveniopormescr", "juroscr", "multacr", "diabompagamentocr",
-        "limitecreditocr", "limitecontasreceber", "limiteutilizadocontasreceber", "funcionario", "pispasep", "numerocarteira", "seriecarteira", "ufcarteira"};
-    private static final int CODCADASTRCLIENTES = 0;
-    private static final int NOME = 1;
-    private static final int NASCIMENTO = 2;
-    private static final int ATIVO = 3;
-    private static final int ENDERECO = 4;
-    private static final int NUMERO = 5;
+        "limitecreditocr", "limitecontasreceber", "limiteutilizadocontasreceber", "funcionario", "pispasep", "numerocarteira", "seriecarteira", "ufcarteira"};*/
+   /// private static final int CODCADASTRCLIENTES = 0;
+    private static final int NOME = 0;
+ //   private static final int NASCIMENTO = 2;
+  //  private static final int ATIVO = 3;
+    private static final int ENDERECO = 1;
+   /* private static final int NUMERO = 5;
     private static final int BAIRRO = 6;
     private static final int CIDADE = 7;
     private static final int ESTADO = 8;
@@ -39,9 +46,9 @@ public class ClienteTableModel extends AbstractTableModel {
     private static final int EMAIL = 11;
     private static final int SITE = 12;
     private static final int PONTOREFERENCIA = 13;
-    private static final int ATIVACONVENIADO = 14;
-    private static final int TELEFONE = 15;
-    private static final int CELULAR = 16;
+    private static final int ATIVACONVENIADO = 14;*/
+    private static final int TELEFONE = 2;
+    private static final int CELULAR = 3;/*
     private static final int FAX = 17;
     private static final int FISICA = 18;
     private static final int JURIDICA = 19;
@@ -80,10 +87,15 @@ public class ClienteTableModel extends AbstractTableModel {
     private static final int LIMITECREDITOCR = 59, LIMITECONTASRECEBER = 60, LIMITEUTILIZADOCONTASRECEBER = 61;
     private static final int FUNCIONARIO = 62;
     private static final int PISPASEP = 63, NUMEROCARTEIRA = 64, SERIECARTEIRA = 65, UFCARTEIRA = 66;
-
+*/
     // Cria um SocioTableModel sem nenhuma linha
     public ClienteTableModel() {
         linhas = new ArrayList<Cliente>();
+        try {
+            getClientes();
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteTableModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // Cria um SocioTableModel contendo a lista recebida por parâmetro
@@ -109,17 +121,17 @@ public class ClienteTableModel extends AbstractTableModel {
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
-            case CODCADASTRCLIENTES:
-                return String.class;
+  /*          case CODCADASTRCLIENTES:
+                return String.class;*/
             case NOME:
                 return String.class;
-            case NASCIMENTO:
+            /*case NASCIMENTO:
                 return String.class;
             case ATIVO:
-                return String.class;
+                return String.class;*/
             case ENDERECO:
                 return String.class;
-            case NUMERO:
+            /*case NUMERO:
                 return String.class;
             case BAIRRO:
                 return String.class;
@@ -138,12 +150,12 @@ public class ClienteTableModel extends AbstractTableModel {
             case PONTOREFERENCIA:
                 return String.class;
             case ATIVACONVENIADO:
-                return String.class;
+                return String.class;*/
             case TELEFONE:
                 return String.class;
             case CELULAR:
                 return String.class;
-            case FAX:
+            /*case FAX:
                 return String.class;
             case FISICA:
                 return String.class;
@@ -242,7 +254,7 @@ public class ClienteTableModel extends AbstractTableModel {
             case SERIECARTEIRA:
                 return String.class;
             case UFCARTEIRA:
-                return String.class;
+                return String.class;*/
             default:
                 // 
                 throw new IndexOutOfBoundsException("Indeice de coluna fora da faixa existente");
@@ -260,16 +272,16 @@ public class ClienteTableModel extends AbstractTableModel {
         Cliente cliente = linhas.get(rowIndex);
 
         switch (columnIndex) {
-            case CODCADASTRCLIENTES:
-                return cliente.getCodcadastroclientes();
+            /*case CODCADASTRCLIENTES:
+                return cliente.getCodcadastroclientes();*/
             case NOME:
-                return cliente.getNome();
+                return cliente.getNome();/*
             case NASCIMENTO:
                 return cliente.getNascimento();
             case ATIVO:
-                return cliente.isAtivo();
+                return cliente.isAtivo();*/
             case ENDERECO:
-                return cliente.getEndereco();
+                return cliente.getEndereco();/*
             case NUMERO:
                 return cliente.getNumero();
             case BAIRRO:
@@ -289,11 +301,11 @@ public class ClienteTableModel extends AbstractTableModel {
             case PONTOREFERENCIA:
                 return cliente.getPontoreferencia();
             case ATIVACONVENIADO:
-                return cliente.isAtivaconveniado();
+                return cliente.isAtivaconveniado();*/
             case TELEFONE:
                 return cliente.getTelefone();
             case CELULAR:
-                return cliente.getCelular();
+                return cliente.getCelular();/*
             case FAX:
                 return cliente.getFax();
             case FISICA:
@@ -393,7 +405,7 @@ public class ClienteTableModel extends AbstractTableModel {
             case SERIECARTEIRA:
                 return cliente.getSeriecarteira();
             case UFCARTEIRA:
-                return cliente.getUfcarteira();
+                return cliente.getUfcarteira();*/
             default:
                 // Não deve ocorrer, pois só existem 2 colunas
                 throw new IndexOutOfBoundsException("Indice de colunda fora da faixa existente");
@@ -406,21 +418,21 @@ public class ClienteTableModel extends AbstractTableModel {
         Cliente cliente = linhas.get(rowIndex);
 
         switch (columnIndex) {
-            case CODCADASTRCLIENTES:
+            /*case CODCADASTRCLIENTES:
                 cliente.setCodcadastroclientes((int) aValue);
-                break;
+                break;*/
             case NOME:
                 cliente.setNome((String) aValue);
-                break;
+                break;/*
             case NASCIMENTO:
                 cliente.setNascimento((Date) aValue);
                 break;
             case ATIVO:
                 cliente.setAtivo((boolean) aValue);
-                break;
+                break;*/
             case ENDERECO:
                 cliente.setEndereco((String) aValue);
-                break;
+                break;/*
             case NUMERO:
                 cliente.setNumero((int) aValue);
                 break;
@@ -450,13 +462,13 @@ public class ClienteTableModel extends AbstractTableModel {
                 break;
             case ATIVACONVENIADO:
                 cliente.setAtivaconveniado((boolean) aValue);
-                break;
+                break;*/
             case TELEFONE:
                 cliente.setTelefone((String) aValue);
                 break;
             case CELULAR:
                 cliente.setCelular((String) aValue);
-                break;
+                break;/*
             case FAX:
                 cliente.setFax((String) aValue);
                 break;
@@ -606,12 +618,59 @@ public class ClienteTableModel extends AbstractTableModel {
                  break;
             case UFCARTEIRA:
                cliente.setUfcarteira((String)aValue);
-                 break;
+                 break;*/
             default:
                 // Não deve ocorrer, pois só existem 2 colunas
                 throw new IndexOutOfBoundsException("Indice de coluna fora da faixa existente");
         }
         fireTableCellUpdated(rowIndex, columnIndex);
     }
-
+    public void getClientes() throws SQLException{
+    List<Cliente> clientes = new ArrayList<Cliente>();           
+        Conexao con=new Conexao();
+        linhas.clear();
+        String query="Select * from cadastroclientes";
+        ResultSet res=con.exeq(query);
+         while (res.next()){
+          Cliente cli = null;
+        try {
+            
+            System.out.println(res.getString(2));
+            cli = new Cliente(res.getString(2),res.getString(5),res.getString(16),res.getString(17));
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteTableModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          clientes.add(cli);
+          
+          linhas.add(cli);
+          
+          
+           }   
+          
+        
+    }
+    //retorna cliente referente a linha especificada
+    public Cliente getCliente(int indiceLinha) {
+        return linhas.get(indiceLinha);
+    }
+    //adiciona cliente 
+    public void addCliente(Cliente cliente){
+        linhas.add(cliente);
+        int ultimoIndice=getColumnCount()-1;
+        fireTableRowsInserted(ultimoIndice, ultimoIndice);
+    }
+    //adiciona lista de clientes ao final da lista
+    public void addListaClientes(List<Cliente> clientes){
+        //pega o valor antigo da tabela que servirá como índice para o primeiro dos novos registros
+        int indice = getRowCount();
+        linhas.addAll(clientes);
+        fireTableRowsInserted(indice, indice+clientes.size());
+        
+        
+    }
+    public void limpar(){
+        linhas.clear();
+        fireTableDataChanged();
+    }
+    
 }

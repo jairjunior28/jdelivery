@@ -6,7 +6,10 @@
 package View;
 
 import Controller.DAOLancador;
+import Model.ClienteTableModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableCellRenderer;
+import util.MeuRenderer;
 
 /**
  *
@@ -14,14 +17,16 @@ import javax.swing.JOptionPane;
  */
 public class Lancador extends javax.swing.JFrame {
 
+    private ClienteTableModel tableModel;
+
     /**
      * Creates new form Lancador
      */
     public Lancador() {
         initComponents();
         escondeElementosDelivery();
-       
-        
+        //ocultaColunasTable();
+
     }
 
     /**
@@ -101,26 +106,15 @@ public class Lancador extends javax.swing.JFrame {
 
         nomelbl.setText("Nome");
 
-        clienteslst.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "código", "Nome", "Endereço", "Fone"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                true, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        clienteslst.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        clienteslst.setModel(getTableModel());
+        clienteslst.setToolTipText("");
+        clienteslst.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        clienteslst.setRowHeight(32);
+        clienteslst.setAutoCreateRowSorter(true);
         jScrollPane1.setViewportView(clienteslst);
+        TableCellRenderer renderer = new MeuRenderer();
+        clienteslst.setDefaultRenderer(Object.class, renderer);
 
         javax.swing.GroupLayout deliverypanelLayout = new javax.swing.GroupLayout(deliverypanel);
         deliverypanel.setLayout(deliverypanelLayout);
@@ -129,7 +123,7 @@ public class Lancador extends javax.swing.JFrame {
             .addGroup(deliverypanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(deliverypanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 831, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1)
                     .addGroup(deliverypanelLayout.createSequentialGroup()
                         .addComponent(numerolbl)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -138,7 +132,7 @@ public class Lancador extends javax.swing.JFrame {
                         .addComponent(nomelbl)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nometxt, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGap(14, 14, 14))
         );
         deliverypanelLayout.setVerticalGroup(
             deliverypanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,8 +144,8 @@ public class Lancador extends javax.swing.JFrame {
                     .addComponent(nomelbl)
                     .addComponent(nometxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+                .addGap(21, 21, 21))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -163,8 +157,8 @@ public class Lancador extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(deliverypanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(deliverypanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(12, 12, 12))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(caixabtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -207,31 +201,28 @@ public class Lancador extends javax.swing.JFrame {
     }//GEN-LAST:event_comandabtnActionPerformed
 
     private void deliverybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deliverybtnActionPerformed
-            // TODO add your handling code here:
-            exibeElementosDelivery();
-            DAOLancador.listar();
-            
-            
-        
+        // TODO add your handling code here:
+        exibeElementosDelivery();
+        //DAOLancador.listar();
+
+
     }//GEN-LAST:event_deliverybtnActionPerformed
 
     @SuppressWarnings("empty-statement")
     private void caixabtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_caixabtnActionPerformed
         // TODO add your handling code here:
         escondeElementosDelivery();
-        String valor=JOptionPane.showInputDialog("Informe o valor de fundo de caixa");
+        String valor = JOptionPane.showInputDialog("Informe o valor de fundo de caixa");
 
         float valorf = 0;
-        try{
-        valorf= Float.parseFloat(valor);
-        }
-        catch(Exception e){
+        try {
+            valorf = Float.parseFloat(valor);
+        } catch (Exception e) {
             e.printStackTrace();
-            valor=JOptionPane.showInputDialog("Informe o valor de fundo de caixa");
-            
-            
+            valor = JOptionPane.showInputDialog("Informe o valor de fundo de caixa");
+
         };
-        
+
 
     }//GEN-LAST:event_caixabtnActionPerformed
 
@@ -249,7 +240,7 @@ public class Lancador extends javax.swing.JFrame {
         // TODO add your handling code here:
         escondeElementosDelivery();
     }//GEN-LAST:event_balcaobtnActionPerformed
-    public void escondeElementosDelivery(){
+    public void escondeElementosDelivery() {
         numerolbl.setVisible(false);
         numerotxt.setVisible(false);
         nomelbl.setVisible(false);
@@ -257,7 +248,14 @@ public class Lancador extends javax.swing.JFrame {
         clienteslst.setVisible(false);
         deliverypanel.setVisible(false);
     }
-     public void exibeElementosDelivery(){
+
+    public void ocultaColunasTable() {
+        
+            clienteslst.getColumnModel().getColumn(0).setPreferredWidth(0);
+        
+    }
+
+    public void exibeElementosDelivery() {
         numerolbl.setVisible(true);
         numerotxt.setVisible(true);
         nomelbl.setVisible(true);
@@ -265,6 +263,7 @@ public class Lancador extends javax.swing.JFrame {
         clienteslst.setVisible(true);
         deliverypanel.setVisible(true);
     }
+
     /**
      * @param args the command line arguments
      */
@@ -295,14 +294,19 @@ public class Lancador extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
-                Lancador l=new Lancador();
+
+                Lancador l = new Lancador();
                 l.setVisible(true);
-                
-                
-                
+
             }
         });
+    }
+
+    private ClienteTableModel getTableModel() {
+        if (tableModel == null) {
+            tableModel = new ClienteTableModel();
+        }
+        return tableModel;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

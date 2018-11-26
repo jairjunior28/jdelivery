@@ -604,6 +604,13 @@ public class Cliente {
     public void setUfcarteira(String ufcarteira) {
         this.ufcarteira = ufcarteira;
     }
+    public Cliente(String nome,String Endereco,String Telefone,String Celular){
     
+        this.nome=nome;
+        this.endereco=Endereco;
+        this.telefone=Telefone;
+        this.celular=Celular;
+        
+    }
     
 }
